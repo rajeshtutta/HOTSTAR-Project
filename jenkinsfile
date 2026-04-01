@@ -20,6 +20,13 @@ stages {
             sh 'mvn clean package -DskipTests'
         }
     }
+    stage('JENKINS TO NEXUS') {
+        steps {
+          withMaven(jdk: 'jdk21', maven: 'maven3', traceability: true) {
+             sh 'mvn deploy'
+}
+        }
+    }
 
     stage('Docker Build') {
         steps {
